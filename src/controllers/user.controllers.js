@@ -73,7 +73,7 @@ const login = asyncHandler(async(req, res) => {
     const user = await User.findOne({
         email,
     })
-    console.log("2");
+    console.log("2.1");
     if (!user) {
         throw new ApiError(400, "user does not exist")
     }
