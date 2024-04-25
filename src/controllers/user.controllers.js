@@ -61,7 +61,7 @@ const register = asyncHandler(async(req, res) => {
 })
 
 const login = asyncHandler(async(req, res) => {
-    // console.log("login is working");
+    console.log("login is working");
     const {email, password} = req.body;
 
     console.log(email, password);
@@ -69,30 +69,30 @@ const login = asyncHandler(async(req, res) => {
     if (!email || !password) {
         throw new ApiError(400, "all fields are required")
     }
-
+    console.log("1");
     const user = await User.findOne({
         email,
     })
-
+    console.log("2");
     if (!user) {
         throw new ApiError(400, "user does not exist")
     }
-
+    console.log("3");
     const isPasswordCorrect = await user.isPasswordCorrect(password);
-
+    console.log("4");
     if (!isPasswordCorrect) {
         throw new ApiError(400, "Incorrect Password");
     }
-
+    console.log("4");
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id)
-
+    console.log("5");
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
-
+    console.log("5.1");
     const options = {
         httpOnly: true,
         secure: true
     }
-
+    console.log("6");
     return res
     .status(200)
     .cookie("accessToken", accessToken, options)
