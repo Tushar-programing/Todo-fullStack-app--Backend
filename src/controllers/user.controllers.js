@@ -90,7 +90,8 @@ const login = asyncHandler(async(req, res) => {
     console.log("5.1");
     const options = {
         httpOnly: true,
-        secure: true
+        secure: true,
+        sameSite: 'none',
     }
     console.log("6");
     return res
@@ -164,6 +165,7 @@ const refreshAccessToken = asyncHandler(async(req, res) => {
         const options = {
             httpOnly: true,
             secure: true,
+            sameSite: 'none',
         }
         console.log(user?._id);
 
