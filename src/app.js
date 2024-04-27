@@ -25,22 +25,22 @@ app.use("/api/v1/users", userRouter)
 
 app.use("/api/v1/todo", todo)
 
-// app.use((err, req, res, next) => {
-//     if (err instanceof ApiError) {
+app.use((err, req, res, next) => {
+    if (err instanceof ApiError) {
   
-//       // console.log(err)
-//       return res.status(err.statusCode).json({
-//         statusCode: err.statusCode,
-//         message: err.message,
-//         success: false
+      // console.log(err)
+      return res.status(err.statusCode).json({
+        statusCode: err.statusCode,
+        message: err.message,
+        success: false
   
-//       });
-//     }
-//     // console.log(err)
-//     return res.status(500).json({
-//       success: false,
-//       message: 'Something went wrong on the server',
-//     });
-//   });
+      });
+    }
+    // console.log(err)
+    return res.status(500).json({
+      success: false,
+      message: 'Something went wrong on the server',
+    });
+  });
 
 export { app }
